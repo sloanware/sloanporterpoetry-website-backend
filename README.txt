@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------
-Website by sloanware | www.sloanware.com
+Website by sloanware | www.sloanware.com | www.github.com/sloanware
 ---------------------------------------------------------------------------------------------
 
 Created August 2025
@@ -8,7 +8,7 @@ Welcome to the backend code of a poet's portfolio website found at
 	sloanporterpoetry.com
 
 As of 2025, the backend is being hosted on Render.
-For information about the frontend, go to https://github.com/sloanware/sloanporterpoetry-website-frontend.
+For information about the frontend, go to github.com/sloanware/sloanporterpoetry-website-frontend.
 
 The backend was developed using Express in Node.js.
 NPM package dependencies are Nodemailer, Validator, CORS, and express-rate-limit.
