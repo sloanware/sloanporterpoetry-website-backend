@@ -1,0 +1,26 @@
+{
+  "name": "sloanporterpoetry-website-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "node --watch --env-file=.env server"
+  },
+  "keywords": [
+    "poetry",
+    "portfolio",
+    "node.js",
+    "express"
+  ],
+  "author": "sloanware",
+  "license": "ISC",
+  "description": "Backend for Sloan Porter Poetry portfolio website with newsletter and contact form.",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "nodemailer": "^7.0.5",
+    "validator": "^13.15.15"
+  }
+}
