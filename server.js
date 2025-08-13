@@ -14,6 +14,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.set('trust proxy', 1);
+app.use(express.json());
 const port = process.env.PORT || 3000;
 
 //Frontend and backend hosted on separate domains, so CORS must be enabled.
