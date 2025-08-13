@@ -3,13 +3,12 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import contact from './routes/contact.js';
-import newsletter from './routes/newsletter.js';
 import notFound from './middleware/notFound.js';
 import errorHandler from './middleware/error.js';
 
 console.log("Server initiated...");
 
-//Using ES Modules, so __filename and __dirname must be defined.
+//Using ES Modules, so __filename and __dirname must be defined
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -18,7 +17,7 @@ app.set('trust proxy', 1);
 app.use(express.json());
 const port = process.env.PORT || 3000;
 
-//Frontend and backend hosted on separate domains, so CORS must be enabled.
+//Frontend and backend hosted on separate domains, so CORS must be enabled
 app.use(cors({
   origin: [
     'https://www.sloanporterpoetry.com',
@@ -27,11 +26,10 @@ app.use(cors({
   ]
 }));
 
-//Routes.
+//Routes
 app.use('/api/contact', contact);
-app.use('/api/newsletter', newsletter);
 
-//Custom error handler.
+//Custom error handler
 app.use(notFound);
 app.use(errorHandler);
 

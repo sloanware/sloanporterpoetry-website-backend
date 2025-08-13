@@ -2,3 +2,5 @@
 READMEDEV.txt
 test-smtp.js
 controllers/contactController_old.js
+controllers/newsletterController.js
+routes/newsletter.js
