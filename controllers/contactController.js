@@ -6,6 +6,10 @@ import isDisposableEmail from 'is-disposable-email';
 // @auth   N/A
 export const forwardMessage = async (req, res, next) => {
     try {
+        if (!req.body) {
+            return res.status(400).json( {msg: 'All fields are required. Please fill them in.' });
+        }
+        
         const { name, email, message, website } = req.body;
 
         // Honeypot
