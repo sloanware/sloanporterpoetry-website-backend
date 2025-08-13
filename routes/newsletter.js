@@ -1,6 +1,6 @@
 import express from 'express';
-import { } from '../controllers/newsletterController.js';
-import { } from '../middleware/rateLimit.js';
+import { addEmail } from '../controllers/newsletterController.js';
+import { newsletterLimiter } from '../middleware/rateLimit.js';
 
 const router = express.Router();
 

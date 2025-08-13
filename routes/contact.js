@@ -1,6 +1,6 @@
 import express from 'express';
-import { } from '../controllers/contactController.js';
-import { } from '../middleware/rateLimit.js';
+import { forwardMessage } from '../controllers/contactController.js';
+import { contactFormLimiter } from '../middleware/rateLimit.js';
 
 const router = express.Router();
 
