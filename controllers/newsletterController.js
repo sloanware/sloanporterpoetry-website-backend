@@ -1,4 +1,5 @@
 import validator from 'validator';
+import isDisposableEmail from 'is-disposable-email';
 
 // @desc   Adds email to subscriber list
 // @route  POST /api/newsletter
@@ -12,6 +13,9 @@ export const addEmail = async (req, res, next) => {
         // Validation
         if (!email || !validator.isEmail(email)) {
             return res.status(400).json({ msg: 'Please provide a valid email address.' });
+        }
+        if (isDisposableEmail(email)) {
+            return res.status(400).json({ msg: 'Disposable email addresses are not allowed.' });
         }
 
         // Sanitization

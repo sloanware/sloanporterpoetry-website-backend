@@ -23,8 +23,7 @@ P.S. The books listed on the website are absolutely real, check them out ;)
 
 Environment Variables:
 
-    OUTLOOK_EMAIL
-    OUTLOOK_PASSWORD
+    MAILERSEND_EMAIL_API_KEY
     MAILERSEND_RECIPIENT_API_KEY
 
 ---------------------------------------------------------------------------------------------
@@ -33,9 +32,9 @@ Versions:
 
 	Node v22.16.0
     Express v5.1.0
-    Nodemailer v7.0.5
     Validator v13.15.15
     CORS v2.8.5
     express-rate-limit v7.5.1
+    is-disposable-email v0.0.1
 
 ---------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 import validator from 'validator';
-import nodemailer from 'nodemailer';
+import isDisposableEmail from 'is-disposable-email';
 
 // @desc   Forward user message to personal email
 // @route  POST /api/contact
@@ -21,6 +21,9 @@ export const forwardMessage = async (req, res, next) => {
         if (!validator.isEmail(email)) {
             return res.status(400).json({ msg: 'Invalid email address. Please try again.' });
         }
+        if (isDisposableEmail(email)) {
+            return res.status(400).json({ msg: 'Disposable email addresses are not allowed.' });
+        }
         if (message.length > 2000) {
             return res.status(400).json({ msg: 'Message is too long. Please try again.'});
         }
@@ -36,31 +39,26 @@ export const forwardMessage = async (req, res, next) => {
             message: sanitizedMessage,
         });
 
-        // Forward message via Nodemailer and Outlook's SMTP
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            port: 587, // STARTTLS port
-            secure: false, // Encryption happens after connections is established using STARTTLS
-            auth: {
-                user: process.env.OUTLOOK_EMAIL,
-                pass: process.env.OUTLOOK_PASSWORD,
+        // Send email via MailerSend API
+        const response = await fetch('https://api.mailersend.com/v1/email', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.MAILERSEND_EMAIL_API_KEY}`,
+                'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                from: { email: 'no-reply@sloanporterpoetry.com' },
+                to: [{ email: 'sloanporter@outlook.com' }],
+                subject: 'New message from your poetry website!',
+                text: `Name: ${sanitizedName}\nEmail: ${sanitizedEmail}\nMessage: ${sanitizedMessage}`
+            })
         });
 
-        const mailOptions = {
-            from: process.env.OUTLOOK_EMAIL,
-            to: process.env.OUTLOOK_EMAIL,
-            subject: 'New message from your poetry website!',
-            text: `
-                Name: ${sanitizedName},
-                Email: ${sanitizedEmail},
-                Message: ${sanitizedMessage}
-            `,
-            replyTo: `"${sanitizedName}" <${sanitizedEmail}>`, // Makes reply go to sender.
-        };
+        if (!response.ok) {
+            throw new Error('MailerSend API error.');
+        }
 
-        await transporter.sendMail(mailOptions);
-        console.log('Message successfully sent.');
+        console.log('Message successfully sent via MailerSend.');
 
         return res.status(200).json({ msg: 'Message Sent!' });
     } catch (err) {

@@ -4,7 +4,7 @@ import rateLimit from 'express-rate-limit';
 export const contactFormLimiter = rateLimit({
     windowMs: 60000,
     max: 3,
-    message: { msg: 'Too many submissions. Please try again later.' },
+    message: { msg: 'Too many submissions. Please try again in 1 minute.' },
     standardHeaders: true,
     legacyHeaders: false,
 });
@@ -13,7 +13,7 @@ export const contactFormLimiter = rateLimit({
 export const newsletterLimiter = rateLimit({
     windowMs: 30000,
     max: 3,
-    message: { msg: 'Too many submission. Please try again later.' },
+    message: { msg: 'Too many submission. Please try again 30 seconds.' },
     standardHeaders: true,
     legacyHeaders: false,
 });
